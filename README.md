@@ -1,11 +1,12 @@
-Para executar a API e muito fácil, basta seguir os passos abaixo:
+Para executar a API é muito fácil, basta seguir os passos abaixo:
 
 1. Primeiramente ir ao arquivo **constsDev** e alterar:
-   -keyJWT (A senha que você desejar)
-   -linkNode (Para o link da sua hospedagem)
+
+   - keyJWT (A senha que você desejar)
+   - linkNode (Para o link da sua hospedagem)
 
 2. Após executar os processos acima execute o comando:
-   -node app.js
+   - node app.js
 
 **O que esta sendo usado nesta API**
 
