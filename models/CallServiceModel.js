@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const CallServiceSchema = new Schema({
   title: String,
-  service: String,
+  description: String,
   status: String,
   user: String,
   technical: String,

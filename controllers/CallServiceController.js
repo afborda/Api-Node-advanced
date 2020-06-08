@@ -9,4 +9,13 @@ module.exports = {
         return res.json(callService);
       });
   },
+
+  getCall: function (req, res) {
+    CallServiceModel.find({})
+      .lean()
+      .exec(function (err, callService) {
+        if (err) return res.json([]);
+        return res.json(callService);
+      });
+  },
 };

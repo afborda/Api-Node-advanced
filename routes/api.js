@@ -11,5 +11,6 @@ router.use(AuthController.check_token);
 router.get("/people", PersonController.all);
 router.get("/products", ProductController.all);
 router.get("/callservice", CallServiceController.all);
+router.get("/callservice/:id", CallServiceController.getCall);
 
 module.exports = router;
