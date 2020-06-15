@@ -10,6 +10,10 @@ const AuthController = require("../controllers/AuthController");
 router.use(AuthController.check_token);
 
 router.get('/help-desk', HelpDeskController.show);
+router.post('/help-desk', HelpDeskController.store);
+
+
+
 router.get("/people", PersonController.all);
 router.get("/products", ProductController.all);
 router.get("/callservice", CallServiceController.all);
