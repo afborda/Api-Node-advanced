@@ -1,0 +1,14 @@
+version: '3.4'
+services:
+  front:
+    build:
+      context: .
+      args:
+        - "BUILD_ARGUMENT_ENV=dev"
+      dockerfile: Dockerfile
+    container_name: backend-node
+    volumes:
+      - ./:/app
+    restart: always
+    ports:
+      - 3333:3333
