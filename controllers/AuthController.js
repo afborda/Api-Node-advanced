@@ -26,6 +26,7 @@ module.exports = {
   },
 
   login: function (req, res) {
+    console.log('abc');
     const password = req.body.password;
     const email = req.body.email;
     UserModel.findOne({ email: email })
