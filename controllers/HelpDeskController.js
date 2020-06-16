@@ -33,6 +33,7 @@ module.exports = {
 
             HelpDeskModel.find(filter)
                 .populate('user')
+                .populate('technical')
                 .lean()
                 .exec(function (err, hd) {
                     res.status(200).json(hd);
