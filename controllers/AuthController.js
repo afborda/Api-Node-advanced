@@ -42,7 +42,7 @@ module.exports = {
 
         if (!auth_err) {
           if (bcrypt.compareSync(password, user.password)) {
-            let token = jwt.sign({ _id: user._id }, consts.keyJWT, {
+            let token = jwt.sign({ _id: user._id, isadmin: user.isadmin}, consts.keyJWT, {
               expiresIn: consts.expiresJWT,
             });
             delete user.password;

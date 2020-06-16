@@ -17,6 +17,7 @@ module.exports = {
             const id = decoded._id;
             const hdData = req.body;
             hdData['user'] = id;
+            hdData['status'] = 'aberto';
             const healpdesk = new HelpDeskModel(hdData);
             healpdesk.save();
             res.status(200).json(healpdesk);
@@ -24,22 +25,30 @@ module.exports = {
     },
     index: async function (req, res) {
         const token = req.get("Authorization");
-
         jwt.verify(token, consts.keyJWT, (err, decoded) => {
             const id = decoded._id;
-            UserModel.findById(id)
-                .lean()
-                .exec(function (err, user) {
-                    console.log(user);
-                    const filter = {};
-                    if (!user.isadmin) filter = {user: id};
+            console.log(decoded);
+            if(decoded.isadmin) filter = {user: id};
 
-                    HelpDeskModel.find(filter)
-                        .lean()
-                        .exec(function (err, hd) {
-                            res.status(200).json(hd);
-                        })
+            HelpDeskModel.find(filter)
+                .lean()
+                .exec(function (err, hd) {
+                    res.status(200).json(hd);
                 });
+        });
+    },
+    changeStatus: function (req, res) {
+        const token = req.get("Authorization");
+         jwt.verify(token, consts.keyJWT, (err, decoded) => {
+            if (!decoded.isadmin) res.status(401).json({errors: ["Você nao tem permissao para realizar esta ação"]});
+            else {
+                const status = req.body.status;
+                console.log(status, req.body.id);
+                HelpDeskModel.findOneAndUpdate({_id: req.body.id}, {status: status})
+                    .exec(function (err, hd) {
+                        res.status(200).json(hd);
+                    });
+            }
 
         });
 

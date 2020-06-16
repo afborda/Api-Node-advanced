@@ -12,6 +12,16 @@ router.use(AuthController.check_token);
 router.get('/help-desk/show', HelpDeskController.show);
 router.post('/help-desk', HelpDeskController.store);
 router.get('/help-desk', HelpDeskController.index);
+router.post('/help-desk/change-status', HelpDeskController.changeStatus);
+/**
+ * @route POST /help-desk/change-status
+ * * * example
+ * @json
+ *  {
+	"id": "5ee8152b75a90e04725d2a7f",
+	"status": "fechado"
+ *  }
+ */
 
 
 router.get("/people", PersonController.all);

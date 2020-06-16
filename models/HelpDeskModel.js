@@ -14,6 +14,7 @@ const HelpDeskSchema = new Schema({
     priority: String,
     nregistration: String,
     description: String,
+    status: String
 });
 
 module.exports = mongoose.model("HelpDesk", HelpDeskSchema);
