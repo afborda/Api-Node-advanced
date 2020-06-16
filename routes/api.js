@@ -9,9 +9,9 @@ const AuthController = require("../controllers/AuthController");
 
 router.use(AuthController.check_token);
 
-router.get('/help-desk', HelpDeskController.show);
+router.get('/help-desk/show', HelpDeskController.show);
 router.post('/help-desk', HelpDeskController.store);
-
+router.get('/help-desk', HelpDeskController.index);
 
 
 router.get("/people", PersonController.all);
