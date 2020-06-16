@@ -10,6 +10,10 @@ const HelpDeskSchema = new Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:'User'
     },
+    technical :{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'User'
+    },
     type: String,
     priority: String,
     nregistration: String,

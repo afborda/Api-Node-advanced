@@ -22,7 +22,15 @@ router.post('/help-desk/change-status', HelpDeskController.changeStatus);
 	"status": "fechado"
  *  }
  */
-
+router.post('/help-desk/attach-technical', HelpDeskController.attachUserTechnical);
+/**
+ * @route POST /help-desk/attach-technical
+ * * * example
+ * @json
+ *  {
+	"technicalid": "5ee8152b75a90e04725d2a7f",
+ *  }
+ */
 
 router.get("/people", PersonController.all);
 router.get("/products", ProductController.all);

@@ -6,8 +6,8 @@ const jwt = require("jsonwebtoken");
 module.exports = {
     show: function (req, res) {
         return res.json({
-            "prioridade": [{id: "P01", "text": "Baixa"}, {id: "P02", "text": "Alta"}, {id: "P03", text: "Média"}],
-            "area": [{id: "A01", text: "Financeiro"}, {id: "A02", text: "TI"}, {id: "A03", text: "RH"}],
+            "prioridade": [ "Baixa", "Alta", "Média"],
+            "area": ["Financeiro" , "TI",  "RH"],
             "tipo_atendimento": ["dev", "mais folhas", "help desk", "saude"]
         });
     },
@@ -28,9 +28,11 @@ module.exports = {
         jwt.verify(token, consts.keyJWT, (err, decoded) => {
             const id = decoded._id;
             console.log(decoded);
-            if(decoded.isadmin) filter = {user: id};
+            let filter = {};
+            if(!decoded.isadmin) filter = {user: id};
 
             HelpDeskModel.find(filter)
+                .populate('user')
                 .lean()
                 .exec(function (err, hd) {
                     res.status(200).json(hd);
@@ -51,6 +53,18 @@ module.exports = {
             }
 
         });
-
+    },
+    attachUserTechnical: function (req, res) {
+        const token = req.get("Authorization");
+        jwt.verify(token, consts.keyJWT, (err, decoded) => {
+            if (!decoded.isadmin) res.status(401).json({errors: ["Você nao tem permissao para realizar esta ação"]});
+            else {
+                const user = req.body.technicalid;
+                HelpDeskModel.findOneAndUpdate({_id: req.body.id}, {technical: user})
+                    .exec(function (err, hd) {
+                        res.status(200).json(hd);
+                    });
+            }
+        });
     }
 }
